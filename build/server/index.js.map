@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../server/index.js"],"names":[],"mappings":";;;;;mBAGmB,OAAO;;;;AAF1B,OAAO,CAAC,GAAG,CAAC,IAAI,GAAG,IAAI,CAAC;;AAGxB,iBAAO,IAAI,EAAE,CAAC","file":"index.js","sourcesContent":["// TODO: Set via config. -MANI\nprocess.env.PORT = 3000;\n\nimport server from './app';\nserver.init();\n"]}
