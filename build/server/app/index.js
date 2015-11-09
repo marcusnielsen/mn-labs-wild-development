@@ -43,12 +43,14 @@ var event$ = _rx2['default'].Observable.interval(1000).timeInterval().map(functi
   return JSON.stringify(value);
 });
 
+var event$Subscriptions = [];
+
 io.on('connection', function (socket) {
   console.info('a user connected: ' + socket);
 
-  event$.subscribe(function (val) {
+  event$Subscriptions.push(event$.subscribe(function (val) {
     socket.emit('message', val);
-  });
+  }));
 });
 
 function init(done) {
@@ -56,13 +58,25 @@ function init(done) {
     console.log('Server listening on port: ' + process.env.PORT + '\n');
 
     if (done) {
-      done(server);
+      done({
+        server: server,
+        io: io
+      });
     }
   });
 }
 
+function close() {
+  server.close();
+  io.close();
+  event$Subscriptions.forEach(function (subscription) {
+    subscription.dispose();
+  });
+}
+
 exports['default'] = {
-  init: init
+  init: init,
+  close: close
 };
 module.exports = exports['default'];
 //# sourceMappingURL=index.js.map

@@ -19,6 +19,8 @@ var _socketIoClient = require('socket.io-client');
 
 var _socketIoClient2 = _interopRequireDefault(_socketIoClient);
 
+var socket = (0, _socketIoClient2['default'])();
+
 function render(values) {
   _react2['default'].render(_react2['default'].createElement(
     'div',
@@ -41,8 +43,6 @@ function render(values) {
     )
   ), document.querySelector('[data-app]'));
 }
-
-var socket = (0, _socketIoClient2['default'])();
 
 var socketConnect$ = _rx2['default'].Observable.fromEvent(socket, 'connect').map(function () {
   return 'Connected.';

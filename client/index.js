@@ -1,6 +1,8 @@
 import React from 'react';
 import Rx from 'rx';
 import immutable from 'immutable';
+import ioInit from 'socket.io-client';
+const socket = ioInit();
 
 function render(values) {
   React.render(
@@ -14,9 +16,6 @@ function render(values) {
       </div>),
       document.querySelector('[data-app]'));
 }
-
-import ioInit from 'socket.io-client';
-const socket = ioInit();
 
 const socketConnect$ = Rx.Observable.fromEvent(socket, 'connect')
   .map(() => {

@@ -23,12 +23,16 @@ const event$ = Rx.Observable.interval(1000)
     return JSON.stringify(value);
   });
 
+const event$Subscriptions = [];
+
 io.on('connection', (socket) => {
   console.info('a user connected: ' + socket);
 
-  event$.subscribe((val) => {
-    socket.emit('message', val);
-  });
+  event$Subscriptions.push(
+    event$.subscribe((val) => {
+      socket.emit('message', val);
+    })
+  );
 });
 
 function init(done) {
@@ -36,11 +40,23 @@ function init(done) {
     console.log('Server listening on port: ' + process.env.PORT + '\n');
 
     if (done) {
-      done(server);
+      done({
+        server: server,
+        io: io,
+      });
     }
+  });
+}
+
+function close() {
+  server.close();
+  io.close();
+  event$Subscriptions.forEach((subscription) => {
+    subscription.dispose();
   });
 }
 
 export default {
   init: init,
+  close: close,
 };
