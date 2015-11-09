@@ -34,7 +34,10 @@ io.on('connection', (socket) => {
 function init(done) {
   server.listen(process.env.PORT, function onListen() {
     console.log('Server listening on port: ' + process.env.PORT + '\n');
-    done(server);
+
+    if (done) {
+      done(server);
+    }
   });
 }
 

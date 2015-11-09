@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"index.js","sourcesContent":[]}
+{"version":3,"sources":["../../../server/config/index.js"],"names":[],"mappings":";;AAAA,OAAO,CAAC,QAAQ,CAAC,CAAC,MAAM,CAAC;AACvB,MAAI,EAAE,OAAO,GAAG,OAAO,CAAC,GAAG,CAAC,QAAQ;CACrC,CAAC,CAAC","file":"index.js","sourcesContent":["require('dotenv').config({\n  path: '.env-' + process.env.NODE_ENV,\n});\n"]}

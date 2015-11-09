@@ -1,4 +1,6 @@
-"use strict";
+'use strict';
 
-// TODO: Set via dotenv. -MANI
+require('dotenv').config({
+  path: '.env-' + process.env.NODE_ENV
+});
 //# sourceMappingURL=index.js.map

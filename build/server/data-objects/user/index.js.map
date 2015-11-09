@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../server/data-objects/user/index.js"],"names":[],"mappings":";;;;;qBAAwB,WAAW;;AAApB,SAAS,WAAW,GAAa;MAAZ,KAAK,yDAAG,EAAE;;AAC5C,SAAO;AACL,SAAK,EAAE,KAAK;GACb,CAAC;CACH","file":"index.js","sourcesContent":["export default function userFactory(email = '') {\n  return {\n    email: email,\n  };\n}\n"]}
