@@ -1,5 +1,4 @@
-// TODO: Set via config. -MANI
-process.env.PORT = 3000;
-
-import server from './app';
-server.init();
+// TODO: Find out how to do empty export/import. -MANI
+require('config');
+import app from './app';
+app.init();

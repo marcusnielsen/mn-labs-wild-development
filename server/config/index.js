@@ -1,1 +1,3 @@
-// TODO: Set via dotenv. -MANI
+require('dotenv').config({
+  path: '.env-' + process.env.NODE_ENV,
+});
