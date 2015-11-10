@@ -1,7 +1,7 @@
 import React from 'react';
 
 function getClassNames(selectedName, name) {
-  return selectedName === name ? 'text-success' : '';
+  return name.startsWith(selectedName) ? 'text-success' : '';
 }
 
 
