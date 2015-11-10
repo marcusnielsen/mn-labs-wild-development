@@ -1,6 +1,6 @@
 import Rx from 'rx';
 
-const themeName$ = Rx.Observable.fromArray([
+const themeNames = [
   'cerulean',
   'cosmo',
   'cyborg',
@@ -17,7 +17,11 @@ const themeName$ = Rx.Observable.fromArray([
   'superhero',
   'united',
   'yeti',
-]);
+];
+
+const themeName$ = Rx.Observable.fromArray(themeNames).filter((themeName) => {
+  return themeName === 'darkly';
+});
 
 const themeHref$ = Rx.Observable.zip(
   themeName$,
@@ -29,4 +33,7 @@ const themeHref$ = Rx.Observable.zip(
     return `http://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/${themeName}/bootstrap.min.css`;
   });
 
-export default themeHref$;
+export default {
+  themeHref$: themeHref$,
+  themeNames: themeNames,
+};

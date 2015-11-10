@@ -1,11 +1,11 @@
 import React from 'react';
 import socketMessage$ from './socket';
-import themeHref$ from './theme';
+import theme from './theme';
 import Login from './components/login';
 
 const themeLink = document.querySelector('[data-theme]');
 
-themeHref$.subscribe((themeHref) => {
+theme.themeHref$.subscribe((themeHref) => {
   themeLink.href = themeHref;
 });
 
@@ -15,8 +15,7 @@ function render(messages) {
           <h3>React Entry</h3>
           <div className="row">
             <div className="col-md-6">
-              test
-              <Login />
+              <Login names={theme.themeNames}/>
             </div>
 
             <div className="col-md-6">{
