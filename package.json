@@ -11,7 +11,7 @@
     "prebuild": "rimraf build/* && mkdirp build/client",
     "build": "npm run build:server && npm run build:client",
     "build:server": "babel server -d build/server -s",
-    "build:client": "browserify client/index.js -t babelify --outfile build/client/index.js && npm run build:client:assets",
+    "build:client": "browserify client/index.js -d -t [ babelify ] --outfile build/client/index.js && npm run build:client:assets",
     "build:client:assets": "cpy client/index.html build/client/",
     "start": "node build/server/index.js",
     "start:dev": "NODE_ENV=development babel-node server/index.js",
@@ -19,7 +19,7 @@
     "live-reload": "live-reload --port 35729 build/",
     "watch:server": "NODE_ENV=development nodemon -w server/ --exec 'npm run build:server && npm start'",
     "watch:test": "nodemon -w server/ --exec 'npm run build:server && npm run test'",
-    "watch:client": "parallelshell \"npm run live-reload\" \"watchify client/index.js -t babelify --outfile build/client/index.js\""
+    "watch:client": "parallelshell \"npm run live-reload\" \"watchify client/index.js -d -t [ babelify ] --outfile build/client/index.js\""
   },
   "author": "Marcus Nielsen",
   "license": "MIT",
