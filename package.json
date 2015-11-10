@@ -6,7 +6,6 @@
   "main": "build/server/index.js",
   "scripts": {
     "postinstall": "ln -s ../../node-ws node_modules/app",
-    "pretest": "npm run build",
     "test": "NODE_ENV=test tape build/**/*.test.js | faucet",
     "lint": "eslint .",
     "prebuild": "rimraf build/* && mkdirp build/client",
@@ -15,11 +14,11 @@
     "build:client": "browserify client/index.js -t babelify --outfile build/client/index.js && npm run build:client:assets",
     "build:client:assets": "cpy client/index.html build/client/",
     "start": "node build/server/index.js",
-    "start:dev": "babel-node server/index.js",
-    "start:debug": "iron-node build/server/index.js",
+    "start:dev": "NODE_ENV=development babel-node server/index.js",
+    "start:debug": "NODE_ENV=development iron-node build/server/index.js",
     "live-reload": "live-reload --port 35729 build/",
-    "watch:server": "nodemon -w server/ --exec 'npm run build && npm start'",
-    "watch:test": "nodemon -w server/ --exec 'npm run test'",
+    "watch:server": "NODE_ENV=development nodemon -w server/ --exec 'npm run build:server && npm start'",
+    "watch:test": "nodemon -w server/ --exec 'npm run build:server && npm run test'",
     "watch:client": "watchify client/index.js -t babelify --outfile build/client/index.js"
   },
   "author": "Marcus Nielsen",

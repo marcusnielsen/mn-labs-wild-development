@@ -12,9 +12,12 @@ tape('Init app', function onTest(test) {
 });
 
 // TODO: Verify if options are needed. -MANI
+// Websocket as transport might be good to have
+// as default test behavior.
+
 const websocketOptions = {
-  transports: ['websocket'],
-  'force new connection': true,
+  // transports: ['websocket'],
+  // 'force new connection': true,
 };
 
 tape('Socket.IO', function onTest(test) {
@@ -22,9 +25,10 @@ tape('Socket.IO', function onTest(test) {
 
   const socket = ioInit(websocketUrl, websocketOptions);
 
-  socket.on('connect', function onConnect() {
-
-  });
+  // TODO: Add OK assertion when connection is done. -MANI
+  // socket.on('connect', function onConnect() {
+  //
+  // });
 
   socket.on('message', function onMessage(message) {
     socket.disconnect();

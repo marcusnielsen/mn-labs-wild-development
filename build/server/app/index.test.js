@@ -25,9 +25,12 @@ var websocketUrl = 'http://localhost:' + process.env.PORT;
 });
 
 // TODO: Verify if options are needed. -MANI
+// Websocket as transport might be good to have
+// as default test behavior.
+
 var websocketOptions = {
-  transports: ['websocket'],
-  'force new connection': true
+  // transports: ['websocket'],
+  // 'force new connection': true,
 };
 
 (0, _tape2['default'])('Socket.IO', function onTest(test) {
@@ -35,7 +38,10 @@ var websocketOptions = {
 
   var socket = (0, _socketIoClient2['default'])(websocketUrl, websocketOptions);
 
-  socket.on('connect', function onConnect() {});
+  // TODO: Add OK assertion when connection is done. -MANI
+  // socket.on('connect', function onConnect() {
+  //
+  // });
 
   socket.on('message', function onMessage(message) {
     socket.disconnect();
