@@ -1,20 +1,38 @@
 import React from 'react';
 import socketMessage$ from './socket';
+import themeHref$ from './theme';
+import Login from './components/login';
 
-function render(values) {
+const themeLink = document.querySelector('[data-theme]');
+
+themeHref$.subscribe((themeHref) => {
+  themeLink.href = themeHref;
+});
+
+function render(messages) {
   React.render(
       (<div>
           <h3>React Entry</h3>
-          <div>{
-            values.map((value, idx) => {
-              return (<div key={idx}>{value}</div>);
-            })
-          }</div>
+          <div className="row">
+            <div className="col-md-6">
+              test
+              <Login />
+            </div>
+
+            <div className="col-md-6">{
+              messages.map((message, idx) => {
+                return (
+                  <div key={idx} className="row">
+                  <span className="text-success col-lg-6">{message.value}</span>
+                  <span className="visible-lg col-lg-6 text-default">{message.interval}</span>
+                  </div>);
+              })
+            }</div>
+          </div>
       </div>),
       document.querySelector('[data-app]'));
 }
 
-socketMessage$.subscribe(
-  (values) => {
-    render(values);
-  });
+socketMessage$.subscribe((messages) => {
+  render(messages);
+});

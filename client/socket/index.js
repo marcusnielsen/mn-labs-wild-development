@@ -5,7 +5,7 @@ const socket = ioInit();
 
 const socketMessage$ = Rx.Observable.fromEvent(socket, 'message')
   .scan((values, value) => {
-    return values.push(value);
+    return values.push(JSON.parse(value));
   }, immutable.List());
 
 export default socketMessage$;
