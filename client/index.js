@@ -1,13 +1,10 @@
 import React from 'react';
-import Rx from 'rx';
-import immutable from 'immutable';
-import ioInit from 'socket.io-client';
-const socket = ioInit();
+import socketMessage$ from './socket';
 
 function render(values) {
   React.render(
       (<div>
-          <h3>React Entry 2</h3>
+          <h3>React Entry</h3>
           <div>{
             values.map((value, idx) => {
               return (<div key={idx}>{value}</div>);
@@ -17,22 +14,7 @@ function render(values) {
       document.querySelector('[data-app]'));
 }
 
-const socketConnect$ = Rx.Observable.fromEvent(socket, 'connect')
-  .map(() => {
-    return 'Connected.';
-  });
-
-const socketMessage$ = Rx.Observable.fromEvent(socket, 'message');
-
-const socket$ = socketConnect$
-  .flatMap(() => {
-    return socketMessage$;
-  })
-  .scan((values, value) => {
-    return values.push(value);
-  }, immutable.List());
-
-socket$.subscribe(
+socketMessage$.subscribe(
   (values) => {
     render(values);
   });

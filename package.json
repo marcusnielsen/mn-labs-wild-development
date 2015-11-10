@@ -19,7 +19,7 @@
     "live-reload": "live-reload --port 35729 build/",
     "watch:server": "NODE_ENV=development nodemon -w server/ --exec 'npm run build:server && npm start'",
     "watch:test": "nodemon -w server/ --exec 'npm run build:server && npm run test'",
-    "watch:client": "watchify client/index.js -t babelify --outfile build/client/index.js"
+    "watch:client": "parallelshell \"npm run live-reload\" \"watchify client/index.js -t babelify --outfile build/client/index.js\""
   },
   "author": "Marcus Nielsen",
   "license": "MIT",
@@ -42,6 +42,7 @@
     "mkdirp": "^0.5.1",
     "morgan": "^1.6.1",
     "nodemon": "^1.7.1",
+    "parallelshell": "^2.0.0",
     "react": "^0.13.3",
     "rimraf": "^2.4.3",
     "rx": "^4.0.0",

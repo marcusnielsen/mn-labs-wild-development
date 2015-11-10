@@ -37,7 +37,6 @@ io.on('connection', (socket) => {
 
 function init(done) {
   server.listen(process.env.PORT, function onListen() {
-    debugger;
     console.log('Server listening on port: ' + process.env.PORT + '\n');
 
     if (done) {
